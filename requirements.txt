@@ -1,6 +1,8 @@
+bcrypt==4.3.0
 fastapi==0.116.1
 jwt==1.4.0
 requests==2.32.4
+passlib==1.7.4
 psycopg==3.2.9
 pydantic_settings==2.10.1
 sqlmodel==0.0.24
