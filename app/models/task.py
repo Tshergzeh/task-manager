@@ -10,7 +10,7 @@ class Task(SQLModel, table=True):
     due_date: datetime | None = Field()
     created_at: datetime = Field(default=datetime.now())
     updated_at: datetime = Field(default=datetime.now())
-    owner: str = Field(foreign_key="users.username")
+    owner: str = Field(foreign_key="user.username")
 
 class TaskUpdate(SQLModel):
     title: str | None
