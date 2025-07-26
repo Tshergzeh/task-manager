@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Response, Depends, status, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from app.database import get_session
 from app.models.task import Task
@@ -30,3 +30,20 @@ async def create_task(
             f"Task creation failed with error: {ex}"
         )
     
+@router.get("/api/tasks", tags=["tasks"])
+def get_all_tasks_for_user(
+    response: Response,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    username = current_user.username
+    tasks_scalar_result = session.exec(
+        select(Task).where(Task.owner == username)
+    )
+    tasks = []
+
+    for task_result in tasks_scalar_result:
+        task = task_result.model_dump()
+        print(tasks.append(task))
+    
+    return {"success": True, "tasks": tasks}
