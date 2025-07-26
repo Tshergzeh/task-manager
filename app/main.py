@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 
 from app import database
-from app.routes import health, users
+from app.routes import health, users, auth
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -13,3 +13,4 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(health.router)
 app.include_router(users.router)
+app.include_router(auth.router)
