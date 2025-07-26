@@ -1,7 +1,8 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 from fastapi.concurrency import asynccontextmanager
 
 from app import database
+from app.routes import health
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -9,3 +10,5 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+
+app.include_router(health.router)

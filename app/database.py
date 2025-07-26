@@ -1,4 +1,4 @@
-from sqlmodel import create_engine, Session, SQLModel
+from sqlmodel import create_engine, select, Session, SQLModel
 
 from app.config import settings
 from app.models import user, task
@@ -13,3 +13,13 @@ def create_database_tables():
 def get_session():
     with Session(engine) as session:
         yield session
+        
+def database_health_check(session: Session):
+    def checker():
+        try:
+            session.exec(select(1))
+            return True
+        except Exception as e:
+            return False
+    
+    return checker
