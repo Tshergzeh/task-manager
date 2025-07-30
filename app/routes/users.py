@@ -18,7 +18,6 @@ def create_user(
     try:
         user_model = build_user_model(new_user)
         save_to_database(user_model, session)
-        session.refresh(user_model)
     except exc.IntegrityError as e:
         raise HTTPException(
             status.HTTP_409_CONFLICT,

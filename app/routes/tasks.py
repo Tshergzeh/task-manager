@@ -22,7 +22,6 @@ async def create_task(
 ):
     try:
         save_to_database(task, session)
-        session.refresh(task)
         response.status_code = status.HTTP_201_CREATED
         return {"success": True, "message": "Task created successfully"}
     except Exception as ex:
@@ -58,7 +57,6 @@ def mark_task_as_completed(
     task = checkThatUserOwnsTask(current_user.username, task_id, session)
     task.is_completed = True
     save_to_database(task, session)
-    session.refresh(task)
     return {"success": True, "updated_task": task}
 
 @router.delete("/api/tasks/{task_id}", tags=["tasks"])
