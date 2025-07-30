@@ -3,6 +3,15 @@ from sqlmodel import Session, select
 
 from app.models.task import Task
 
+def emptyScalarTasksIntoList(scalar_result):
+    tasks = []
+
+    for task_result in scalar_result:
+        task = task_result.model_dump()
+        tasks.append(task)
+
+    return tasks
+
 def checkThatTaskIdIsValid(task_id: int, session: Session):
     valid_task = session.get(Task, task_id)
     if not valid_task:

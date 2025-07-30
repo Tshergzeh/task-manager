@@ -8,7 +8,7 @@ from app.database import get_session
 from app.models.task import Task
 from app.models.user import User
 from app.utils.database_utils import save_to_database
-from app.utils.task_utils import checkThatTaskIdIsValid, checkThatUserOwnsTask
+from app.utils.task_utils import checkThatTaskIdIsValid, checkThatUserOwnsTask, emptyScalarTasksIntoList
 from app.utils.user_utils import get_current_user
 
 router = APIRouter()
@@ -46,6 +46,19 @@ def get_all_tasks_for_user(
         print(tasks.append(task))
     
     return {"success": True, "tasks": tasks}
+
+@router.get("/api/tasks/incomplete", tags=["tasks"])
+def get_incomplete_tasks_for_user(
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    incomplete_tasks_scaler_result = session.exec(
+        select(Task)
+            .where(Task.owner == current_user.username)
+            .where(Task.is_completed == False)
+    )
+    incomplete_tasks = emptyScalarTasksIntoList(incomplete_tasks_scaler_result)
+    return {"success": True, "incomplete_tasks": incomplete_tasks}
 
 @router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
 def mark_task_as_completed(
