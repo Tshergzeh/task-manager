@@ -39,12 +39,7 @@ def get_all_tasks_for_user(
     tasks_scalar_result = session.exec(
         select(Task).where(Task.owner == username)
     )
-    tasks = []
-
-    for task_result in tasks_scalar_result:
-        task = task_result.model_dump()
-        print(tasks.append(task))
-    
+    tasks = emptyScalarTasksIntoList(tasks_scalar_result)    
     return {"success": True, "tasks": tasks}
 
 @router.get("/api/tasks/incomplete", tags=["tasks"])
