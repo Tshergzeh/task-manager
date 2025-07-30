@@ -12,9 +12,7 @@ class Task(SQLModel, table=True):
     updated_at: datetime = Field(default=datetime.now())
     owner: str = Field(foreign_key="user.username")
 
-class TaskUpdate(SQLModel):
-    title: str | None
-    description: str | None
-    is_completed: bool | None
-    due_date: datetime | None
+class TaskComplete(SQLModel):
+    id: int
+    is_completed: bool = True
     updated_at: datetime = datetime.now()

@@ -8,6 +8,7 @@ from app.database import get_session
 from app.models.task import Task
 from app.models.user import User
 from app.utils.database_utils import save_to_database
+from app.utils.task_utils import checkThatUserOwnsTask
 from app.utils.user_utils import get_current_user
 
 router = APIRouter()
@@ -32,7 +33,6 @@ async def create_task(
     
 @router.get("/api/tasks", tags=["tasks"])
 def get_all_tasks_for_user(
-    response: Response,
     current_user: User = Depends(get_current_user),
     session: Session = Depends(get_session)
 ):
@@ -47,3 +47,19 @@ def get_all_tasks_for_user(
         print(tasks.append(task))
     
     return {"success": True, "tasks": tasks}
+
+@router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
+def mark_task_as_completed(
+    task_id: int, 
+    response: Response,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    valid_task = session.get(Task, task_id)
+    if not valid_task:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Invalid task ID")
+    task = checkThatUserOwnsTask(current_user.username, task_id, session)
+    task.is_completed = True
+    save_to_database(task, session)
+    session.refresh(task)
+    return {"success": True, "updated_task": task}
