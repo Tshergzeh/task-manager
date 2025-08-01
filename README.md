@@ -16,15 +16,10 @@ Python, FastAPI, Postgres, JWT.
 1. Clone the repo  
 2. Create virtual env  
 3. `pip install -r requirements.txt`  
-4. `uvicorn main:app --reload`
+4. `uvicorn app.main:app --reload`
 
-## Sample Endpoints
-- `POST /register`
-- `POST /login`
-- `GET /tasks`
-
-## Postman Collection
-Link (optional)
+## Endpoints
+After starting the app, all endpoints can be found at `/docs`
 
 ## License
 MIT
