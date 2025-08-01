@@ -204,7 +204,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTM4NjkyNzJ9.DeEXc789w-NtI7YikSpfTArfCiF5CJyCPdmvpMHQgQ0",
+									"value": "{{jwt_token}}",
 									"type": "string"
 								}
 							]
