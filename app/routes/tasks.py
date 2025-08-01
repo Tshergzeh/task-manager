@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Response, Depends, status, HTTPException
@@ -8,7 +9,7 @@ from app.database import get_session
 from app.models.task import Task
 from app.models.user import User
 from app.utils.database_utils import save_to_database
-from app.utils.task_utils import checkThatTaskIdIsValid, checkThatUserOwnsTask, emptyScalarTasksIntoList
+from app.utils.task_utils import build_tasks_by_due_date_statement, checkThatTaskIdIsValid, checkThatUserOwnsTask, emptyScalarTasksIntoList
 from app.utils.user_utils import get_current_user
 
 router = APIRouter()
@@ -67,6 +68,28 @@ def get_completed_tasks_for_user(
     )
     completed_tasks = emptyScalarTasksIntoList(completed_tasks_scaler_result)
     return {"success": True, "completed_tasks": completed_tasks}
+
+@router.get("/api/tasks/by_due_date/", tags=["tasks"])
+def get_tasks_by_due_date(
+    start_date: datetime | None = None, 
+    end_date: datetime | None = None, 
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    if end_date < start_date: # type: ignore
+        raise HTTPException(
+            status.HTTP_400_BAD_REQUEST, 
+            "End date greater than start date"
+        )
+    tasks_by_due_date_scaler_result = session.exec(
+        build_tasks_by_due_date_statement(
+            current_user, 
+            start_date, 
+            end_date
+        )
+    )
+    tasks_by_due_date = emptyScalarTasksIntoList(tasks_by_due_date_scaler_result)
+    return {"success": True, "tasks_by_due_date": tasks_by_due_date}
 
 @router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
 def mark_task_as_completed(
