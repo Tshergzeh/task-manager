@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "24247944-e67e076b-ab61-4588-b5ce-2d8fd8317711",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"id": "24247944-8fe61d7d-a438-435e-8420-d118c2fb99c2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "24247944-abe5a8dd-762a-4543-9afe-e6dbe9d36b4c"
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Create User",
+					"id": "24247944-d5aa04ae-b96d-4615-b466-27243284768b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"tshergzeh\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "24247944-87283eb2-13a6-49fa-b66c-0da0c46f62b9"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"id": "24247944-aa98f583-e9f7-4751-8a0d-fcc0b0d0149b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "tshergzeh",
+									"type": "text",
+									"uuid": "92bb7277-55da-4850-94fc-3edbd0522391"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text",
+									"uuid": "009eb0ff-7b59-43f0-8856-678d13712916"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "24247944-cf1e4369-ea41-4dd9-8c9d-4aa652b7b6e8"
+		},
+		{
+			"name": "Task Management",
+			"item": [
+				{
+					"name": "Create Task",
+					"id": "24247944-7a3668d5-46df-417b-bdd8-c724231c2c1b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTQwODQwMzB9.4GZbCKaBpkTHnMsPsOICSbhfuCgJE5sV_vZkbCD7yiU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Work on GitHub Analyser\",\r\n    \"owner\": \"tshergzeh\",\r\n    \"is_completed\": false,\r\n    \"due_date\": \"2025-07-27\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tasks for User",
+					"id": "24247944-73fed977-da8d-4335-a6d8-4559f8862ef2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTQwODQwMzB9.4GZbCKaBpkTHnMsPsOICSbhfuCgJE5sV_vZkbCD7yiU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incomplete Tasks for User",
+					"id": "24247944-c4be40fa-7233-4f5f-a7b5-6a3b6fb9f55a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTM4NjkyNzJ9.DeEXc789w-NtI7YikSpfTArfCiF5CJyCPdmvpMHQgQ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/incomplete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"incomplete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks for User by Due Date",
+					"id": "24247944-78c51640-9534-4642-bd33-af92ba99eb62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTQwODU5NjN9.koodPBfbop0O92OXWA53te8gbwe8gqcWKnZ-wJJEluk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/by_due_date/?start_date=2025-07-25&end_date=2025-07-24",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"by_due_date",
+								""
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2025-07-25"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-07-24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Task as Completed",
+					"id": "24247944-193157d3-7246-4eb5-8307-f5a0fb605e02",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTM4NjcwNDh9.DAn3IauqdXlTlFjaU0zXtrNMpY88Qc1slx-mD5h6VD8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/mark_complete/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"mark_complete",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"id": "24247944-38015fbd-bfe6-47aa-b408-6490f0b328e2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTM4NjgwODB9.DDfJATb_Uv8GWX7bDo4aNJ4ocWnok_sYKXOYauImTiU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "24247944-8d7242f8-5753-43c2-a90b-c174139d677b"
+		}
+	]
+}
