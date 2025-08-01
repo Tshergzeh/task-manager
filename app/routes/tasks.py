@@ -55,6 +55,19 @@ def get_incomplete_tasks_for_user(
     incomplete_tasks = emptyScalarTasksIntoList(incomplete_tasks_scaler_result)
     return {"success": True, "incomplete_tasks": incomplete_tasks}
 
+@router.get("/api/tasks/completed", tags=["tasks"])
+def get_completed_tasks_for_user(
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    completed_tasks_scaler_result = session.exec(
+        select(Task)
+            .where(Task.owner == current_user.username)
+            .where(Task.is_completed == True)
+    )
+    completed_tasks = emptyScalarTasksIntoList(completed_tasks_scaler_result)
+    return {"success": True, "completed_tasks": completed_tasks}
+
 @router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
 def mark_task_as_completed(
     task_id: int, 
