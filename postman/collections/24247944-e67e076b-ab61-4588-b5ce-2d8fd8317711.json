@@ -172,7 +172,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTQwODQwMzB9.4GZbCKaBpkTHnMsPsOICSbhfuCgJE5sV_vZkbCD7yiU",
+									"value": "{{jwt_token}}",
 									"type": "string"
 								}
 							]
