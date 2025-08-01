@@ -6,7 +6,7 @@ from sqlmodel import Session, select
 from app.models.task import Task
 from app.models.user import User
 
-def emptyScalarTasksIntoList(scalar_result):
+def empty_scalar_tasks_into_list(scalar_result):
     tasks = []
 
     for task_result in scalar_result:
@@ -15,12 +15,12 @@ def emptyScalarTasksIntoList(scalar_result):
 
     return tasks
 
-def checkThatTaskIdIsValid(task_id: int, session: Session):
+def check_that_task_id_is_valid(task_id: int, session: Session):
     valid_task = session.get(Task, task_id)
     if not valid_task:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Invalid task ID")
 
-def checkThatUserOwnsTask(username: str, task_id: int, session: Session):
+def check_that_user_owns_task(username: str, task_id: int, session: Session):
     task = session.exec(
         select(Task)
             .where(Task.owner == username)

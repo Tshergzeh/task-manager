@@ -9,7 +9,7 @@ from app.database import get_session
 from app.models.task import Task
 from app.models.user import User
 from app.utils.database_utils import save_to_database
-from app.utils.task_utils import build_tasks_by_due_date_statement, checkThatTaskIdIsValid, checkThatUserOwnsTask, emptyScalarTasksIntoList
+from app.utils.task_utils import build_tasks_by_due_date_statement, check_that_task_id_is_valid, check_that_user_owns_task, empty_scalar_tasks_into_list
 from app.utils.user_utils import get_current_user
 
 router = APIRouter()
@@ -40,7 +40,7 @@ def get_all_tasks_for_user(
     tasks_scalar_result = session.exec(
         select(Task).where(Task.owner == username)
     )
-    tasks = emptyScalarTasksIntoList(tasks_scalar_result)    
+    tasks = empty_scalar_tasks_into_list(tasks_scalar_result)    
     return {"success": True, "tasks": tasks}
 
 @router.get("/api/tasks/incomplete", tags=["tasks"])
@@ -53,7 +53,7 @@ def get_incomplete_tasks_for_user(
             .where(Task.owner == current_user.username)
             .where(Task.is_completed == False)
     )
-    incomplete_tasks = emptyScalarTasksIntoList(incomplete_tasks_scaler_result)
+    incomplete_tasks = empty_scalar_tasks_into_list(incomplete_tasks_scaler_result)
     return {"success": True, "incomplete_tasks": incomplete_tasks}
 
 @router.get("/api/tasks/completed", tags=["tasks"])
@@ -66,7 +66,7 @@ def get_completed_tasks_for_user(
             .where(Task.owner == current_user.username)
             .where(Task.is_completed == True)
     )
-    completed_tasks = emptyScalarTasksIntoList(completed_tasks_scaler_result)
+    completed_tasks = empty_scalar_tasks_into_list(completed_tasks_scaler_result)
     return {"success": True, "completed_tasks": completed_tasks}
 
 @router.get("/api/tasks/by_due_date/", tags=["tasks"])
@@ -88,7 +88,7 @@ def get_tasks_by_due_date(
             end_date
         )
     )
-    tasks_by_due_date = emptyScalarTasksIntoList(tasks_by_due_date_scaler_result)
+    tasks_by_due_date = empty_scalar_tasks_into_list(tasks_by_due_date_scaler_result)
     return {"success": True, "tasks_by_due_date": tasks_by_due_date}
 
 @router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
@@ -97,8 +97,8 @@ def mark_task_as_completed(
     current_user: User = Depends(get_current_user),
     session: Session = Depends(get_session)
 ):
-    checkThatTaskIdIsValid(task_id, session)
-    task = checkThatUserOwnsTask(current_user.username, task_id, session)
+    check_that_task_id_is_valid(task_id, session)
+    task = check_that_user_owns_task(current_user.username, task_id, session)
     task.is_completed = True
     save_to_database(task, session)
     return {"success": True, "updated_task": task}
@@ -109,8 +109,8 @@ def delete_task(
     current_user: User = Depends(get_current_user),
     session: Session = Depends(get_session)
 ):
-    checkThatTaskIdIsValid(task_id, session)
-    task = checkThatUserOwnsTask(current_user.username, task_id, session)
+    check_that_task_id_is_valid(task_id, session)
+    task = check_that_user_owns_task(current_user.username, task_id, session)
     session.delete(task)
     session.commit()
     return {"success": True, "deleted_task": task}
