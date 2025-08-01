@@ -339,5 +339,12 @@
 			],
 			"id": "24247944-8d7242f8-5753-43c2-a90b-c174139d677b"
 		}
+	],
+	"variable": [
+		{
+			"key": "jwt_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0c2hlcmd6ZWgiLCJleHAiOjE3NTQwODU5NjN9.koodPBfbop0O92OXWA53te8gbwe8gqcWKnZ-wJJEluk",
+			"type": "default"
+		}
 	]
 }
