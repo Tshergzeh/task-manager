@@ -22,9 +22,13 @@ async def create_task(
     session: Session = Depends(get_session)
 ):
     try:
-        save_to_database(task, session)
+        saved_task = save_to_database(task, session)
         response.status_code = status.HTTP_201_CREATED
-        return {"success": True, "message": "Task created successfully"}
+        return {
+            "success": True, 
+            "message": "Task created successfully",
+            "data": saved_task
+        }
     except Exception as ex:
         raise HTTPException(
             status.HTTP_500_INTERNAL_SERVER_ERROR,
