@@ -22,6 +22,8 @@ async def create_task(
     session: Session = Depends(get_session)
 ):
     try:
+        task.owner = current_user.username
+        
         saved_task = save_to_database(task, session)
         response.status_code = status.HTTP_201_CREATED
         return {
