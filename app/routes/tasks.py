@@ -97,15 +97,15 @@ def get_tasks_by_due_date(
     tasks_by_due_date = empty_scalar_tasks_into_list(tasks_by_due_date_scaler_result)
     return {"success": True, "tasks_by_due_date": tasks_by_due_date}
 
-@router.patch("/api/tasks/mark_complete/{task_id}", tags=["tasks"])
-def mark_task_as_completed(
+@router.patch("/api/tasks/toggle/{task_id}", tags=["tasks"])
+def toggle_task_status(
     task_id: int, 
     current_user: User = Depends(get_current_user),
     session: Session = Depends(get_session)
 ):
     check_that_task_id_is_valid(task_id, session)
     task = check_that_user_owns_task(current_user.username, task_id, session)
-    task.is_completed = True
+    task.is_completed = not task.is_completed
     save_to_database(task, session)
     return {"success": True, "updated_task": task}
 
