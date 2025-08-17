@@ -119,4 +119,4 @@ def delete_task(
     task = check_that_user_owns_task(current_user.username, task_id, session)
     session.delete(task)
     session.commit()
-    return {"success": True, "deleted_task": task}
+    return {"success": True, "deleted_task_id": task.id}
