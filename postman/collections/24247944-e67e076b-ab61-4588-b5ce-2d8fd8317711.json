@@ -270,7 +270,7 @@
 					"response": []
 				},
 				{
-					"name": "Mark Task as Completed",
+					"name": "Toggle Task Status",
 					"id": "24247944-193157d3-7246-4eb5-8307-f5a0fb605e02",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
