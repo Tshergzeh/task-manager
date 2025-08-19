@@ -47,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tshergzeh\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"username\": \"igeo\",\r\n    \"password\": \"password\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,7 @@
 								},
 								{
 									"key": "password",
-									"value": "password",
+									"value": "passwordd",
 									"type": "text",
 									"uuid": "009eb0ff-7b59-43f0-8856-678d13712916"
 								}
@@ -140,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Work on GitHub Analyser\",\r\n    \"owner\": \"tshergzeh\",\r\n    \"is_completed\": false,\r\n    \"due_date\": \"2025-07-27\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Not your other task\",\r\n    \"owner\": \"igeo\",\r\n    \"due_date\": \"2025-08-15\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,6 +179,15 @@
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/api/tasks",
 							"host": [
