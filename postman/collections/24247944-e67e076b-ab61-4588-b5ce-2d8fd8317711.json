@@ -289,15 +289,15 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/tasks/mark_complete/6",
+							"raw": "{{base_url}}/api/tasks/toggle/78",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"tasks",
-								"mark_complete",
-								"6"
+								"toggle",
+								"78"
 							]
 						}
 					},
